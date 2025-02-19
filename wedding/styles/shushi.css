@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'CustomFont'; /* Tên font bạn chọn */
+    src: url('/wedding/fonts/DFVN\ Boheme\ Floral.otf') format('truetype'); /* Đường dẫn đến file font */
+}
+.beautiful-card {
+    font-family: 'CustomFont', serif; /* Sử dụng font chữ từ Google Fonts */
+    font-size: 64px; /* Kích thước chữ */
+    font-weight: 500; /* Độ đậm của chữ */
+    color: #333; /* Màu chữ */
+    /* background-color: #f9f9f9; Màu nền */
+    /* padding: 20px; Khoảng cách bên trong thẻ */
+    /* border-radius: 10px; Bo góc thẻ */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); Đổ bóng */
+    text-align: center; /* Căn giữa chữ */
+    max-width: 300px; /* Chiều rộng tối đa */
+    margin: 20px auto; /* Căn giữa thẻ */
+}
+.img-custom {
+    border: 5px solid #ffffff; /* Viền dày 5px, màu đỏ */
+    border-radius: 220px; /* Bo góc viền */
+    /* padding: 10px; Khoảng cách giữa viền và hình ảnh */
+    background-color: #f0f0f0; /* Màu nền giữa viền và hình ảnh */
+}
