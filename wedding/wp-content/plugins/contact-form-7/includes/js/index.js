@@ -190,58 +190,58 @@
             }))
         };
 
-    function l(e) {
-        let r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-        if (wpcf7.blocked) return d(e), void t(e, "submitting");
-        const o = new FormData(e);
-        r.submitter && r.submitter.name && o.append(r.submitter.name, r.submitter.value);
-        const s = {
-            contactFormId: e.wpcf7.id,
-            pluginVersion: e.wpcf7.pluginVersion,
-            contactFormLocale: e.wpcf7.locale,
-            unitTag: e.wpcf7.unitTag,
-            containerPostId: e.wpcf7.containerPost,
-            status: e.wpcf7.status,
-            inputs: Array.from(o, (e => {
-                const t = e[0],
-                    a = e[1];
-                return !t.match(/^_/) && {
-                    name: t,
-                    value: a
-                }
-            })).filter((e => !1 !== e)),
-            formData: o
-        };
-        n({
-            endpoint: `contact-forms/${e.wpcf7.id}/feedback`,
-            method: "POST",
-            body: o,
-            wpcf7: {
-                endpoint: "feedback",
-                form: e,
-                detail: s
-            }
-        }).then((n => {
-            const r = t(e, n.status);
-            return s.status = n.status, s.apiResponse = n, ["invalid", "unaccepted", "spam", "aborted"].includes(r) ? a(e, r, s) : ["sent", "failed"].includes(r) && a(e, `mail${r}`, s), a(e, "submit", s), n
-        })).then((t => {
-            t.posted_data_hash && (e.querySelector('input[name="_wpcf7_posted_data_hash"]').value = t.posted_data_hash), "mail_sent" === t.status && (e.reset(), e.wpcf7.resetOnMailSent = !0), t.invalid_fields && t.invalid_fields.forEach((t => {
-                c(e, t.field, t.message)
-            })), e.wpcf7.parent.querySelector('.screen-reader-response [role="status"]').insertAdjacentText("beforeend", t.message), e.querySelectorAll(".wpcf7-response-output").forEach((e => {
-                e.innerText = t.message
-            }))
-        })).catch((e => console.error(e)))
-    }
-    n.use(((e, n) => {
-        if (e.wpcf7 && "feedback" === e.wpcf7.endpoint) {
-            const {
-                form: n,
-                detail: r
-            } = e.wpcf7;
-            d(n), a(n, "beforesubmit", r), t(n, "submitting")
-        }
-        return n(e)
-    }));
+    // function l(e) {
+    //     let r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
+    //     if (wpcf7.blocked) return d(e), void t(e, "submitting");
+    //     const o = new FormData(e);
+    //     r.submitter && r.submitter.name && o.append(r.submitter.name, r.submitter.value);
+    //     const s = {
+    //         contactFormId: e.wpcf7.id,
+    //         pluginVersion: e.wpcf7.pluginVersion,
+    //         contactFormLocale: e.wpcf7.locale,
+    //         unitTag: e.wpcf7.unitTag,
+    //         containerPostId: e.wpcf7.containerPost,
+    //         status: e.wpcf7.status,
+    //         inputs: Array.from(o, (e => {
+    //             const t = e[0],
+    //                 a = e[1];
+    //             return !t.match(/^_/) && {
+    //                 name: t,
+    //                 value: a
+    //             }
+    //         })).filter((e => !1 !== e)),
+    //         formData: o
+    //     };
+    //     n({
+    //         endpoint: `contact-forms/${e.wpcf7.id}/feedback`,
+    //         method: "POST",
+    //         body: o,
+    //         wpcf7: {
+    //             endpoint: "feedback",
+    //             form: e,
+    //             detail: s
+    //         }
+    //     }).then((n => {
+    //         const r = t(e, n.status);
+    //         return s.status = n.status, s.apiResponse = n, ["invalid", "unaccepted", "spam", "aborted"].includes(r) ? a(e, r, s) : ["sent", "failed"].includes(r) && a(e, `mail${r}`, s), a(e, "submit", s), n
+    //     })).then((t => {
+    //         t.posted_data_hash && (e.querySelector('input[name="_wpcf7_posted_data_hash"]').value = t.posted_data_hash), "mail_sent" === t.status && (e.reset(), e.wpcf7.resetOnMailSent = !0), t.invalid_fields && t.invalid_fields.forEach((t => {
+    //             c(e, t.field, t.message)
+    //         })), e.wpcf7.parent.querySelector('.screen-reader-response [role="status"]').insertAdjacentText("beforeend", t.message), e.querySelectorAll(".wpcf7-response-output").forEach((e => {
+    //             e.innerText = t.message
+    //         }))
+    //     })).catch((e => console.error(e)))
+    // }
+    // n.use(((e, n) => {
+    //     if (e.wpcf7 && "feedback" === e.wpcf7.endpoint) {
+    //         const {
+    //             form: n,
+    //             detail: r
+    //         } = e.wpcf7;
+    //         d(n), a(n, "beforesubmit", r), t(n, "submitting")
+    //     }
+    //     return n(e)
+    // }));
     const d = e => {
         e.querySelectorAll(".wpcf7-form-control-wrap").forEach((t => {
             t.dataset.name && s(e, t.dataset.name)
@@ -315,118 +315,118 @@
             }
         };
 
-    function m(t) {
-        const a = new FormData(t);
-        t.wpcf7 = {
-            id: e(a.get("_wpcf7")),
-            status: t.getAttribute("data-status"),
-            pluginVersion: a.get("_wpcf7_version"),
-            locale: a.get("_wpcf7_locale"),
-            unitTag: a.get("_wpcf7_unit_tag"),
-            containerPost: e(a.get("_wpcf7_container_post")),
-            parent: t.closest(".wpcf7"),
-            schema: void 0
-        }, t.querySelectorAll(".has-spinner").forEach((e => {
-            e.insertAdjacentHTML("afterend", '<span class="wpcf7-spinner"></span>')
-        })), (e => {
-            e.querySelectorAll(".wpcf7-exclusive-checkbox").forEach((t => {
-                t.addEventListener("change", (t => {
-                    const a = t.target.getAttribute("name");
-                    e.querySelectorAll(`input[type="checkbox"][name="${a}"]`).forEach((e => {
-                        e !== t.target && (e.checked = !1)
-                    }))
-                }))
-            }))
-        })(t), (e => {
-            e.querySelectorAll(".has-free-text").forEach((t => {
-                const a = t.querySelector("input.wpcf7-free-text"),
-                    n = t.querySelector('input[type="checkbox"], input[type="radio"]');
-                a.disabled = !n.checked, e.addEventListener("change", (e => {
-                    a.disabled = !n.checked, e.target === n && n.checked && a.focus()
-                }))
-            }))
-        })(t), (e => {
-            e.querySelectorAll(".wpcf7-validates-as-url").forEach((e => {
-                e.addEventListener("change", (t => {
-                    let a = e.value.trim();
-                    a && !a.match(/^[a-z][a-z0-9.+-]*:/i) && -1 !== a.indexOf(".") && (a = a.replace(/^\/+/, ""), a = "http://" + a), e.value = a
-                }))
-            }))
-        })(t), (e => {
-            if (!e.querySelector(".wpcf7-acceptance") || e.classList.contains("wpcf7-acceptance-as-validation")) return;
-            const t = () => {
-                let t = !0;
-                e.querySelectorAll(".wpcf7-acceptance").forEach((e => {
-                    if (!t || e.classList.contains("optional")) return;
-                    const a = e.querySelector('input[type="checkbox"]');
-                    (e.classList.contains("invert") && a.checked || !e.classList.contains("invert") && !a.checked) && (t = !1)
-                })), e.querySelectorAll(".wpcf7-submit").forEach((e => {
-                    e.disabled = !t
-                }))
-            };
-            t(), e.addEventListener("change", (e => {
-                t()
-            })), e.addEventListener("wpcf7reset", (e => {
-                t()
-            }))
-        })(t), (t => {
-            const a = (t, a) => {
-                    const n = e(t.getAttribute("data-starting-value")),
-                        r = e(t.getAttribute("data-maximum-value")),
-                        o = e(t.getAttribute("data-minimum-value")),
-                        c = t.classList.contains("down") ? n - a.value.length : a.value.length;
-                    t.setAttribute("data-current-value", c), t.innerText = c, r && r < a.value.length ? t.classList.add("too-long") : t.classList.remove("too-long"), o && a.value.length < o ? t.classList.add("too-short") : t.classList.remove("too-short")
-                },
-                n = e => {
-                    e = {
-                        init: !1,
-                        ...e
-                    }, t.querySelectorAll(".wpcf7-character-count").forEach((n => {
-                        const r = n.getAttribute("data-target-name"),
-                            o = t.querySelector(`[name="${r}"]`);
-                        o && (o.value = o.defaultValue, a(n, o), e.init && o.addEventListener("keyup", (e => {
-                            a(n, o)
-                        })))
-                    }))
-                };
-            n({
-                init: !0
-            }), t.addEventListener("wpcf7reset", (e => {
-                n()
-            }))
-        })(t), window.addEventListener("load", (e => {
-            wpcf7.cached && t.reset()
-        })), t.addEventListener("reset", (e => {
-            wpcf7.reset(t)
-        })), t.addEventListener("submit", (e => {
-            wpcf7.submit(t, {
-                submitter: e.submitter
-            }), e.preventDefault()
-        })), t.addEventListener("wpcf7submit", (e => {
-            e.detail.apiResponse.captcha && u(t, e.detail.apiResponse.captcha), e.detail.apiResponse.quiz && f(t, e.detail.apiResponse.quiz)
-        })), t.addEventListener("wpcf7reset", (e => {
-            e.detail.apiResponse.captcha && u(t, e.detail.apiResponse.captcha), e.detail.apiResponse.quiz && f(t, e.detail.apiResponse.quiz)
-        })), n({
-            endpoint: `contact-forms/${t.wpcf7.id}/feedback/schema`,
-            method: "GET"
-        }).then((e => {
-            t.wpcf7.schema = e
-        })), t.addEventListener("change", (e => {
-            e.target.closest(".wpcf7-form-control") && wpcf7.validate(t, {
-                target: e.target
-            })
-        }))
-    }
-    document.addEventListener("DOMContentLoaded", (e => {
-        var t;
-        "undefined" != typeof wpcf7 ? void 0 !== wpcf7.api ? "function" == typeof window.fetch ? "function" == typeof window.FormData ? "function" == typeof NodeList.prototype.forEach ? "function" == typeof String.prototype.replaceAll ? (wpcf7 = {
-            init: m,
-            submit: l,
-            reset: p,
-            validate: o,
-            ...null !== (t = wpcf7) && void 0 !== t ? t : {}
-        }, document.querySelectorAll(".wpcf7 > form").forEach((e => {
-            wpcf7.init(e), e.closest(".wpcf7").classList.replace("no-js", "js")
-        }))) : console.error("Your browser does not support String.replaceAll().") : console.error("Your browser does not support NodeList.forEach().") : console.error("Your browser does not support window.FormData().") : console.error("Your browser does not support window.fetch().") : console.error("wpcf7.api is not defined.") : console.error("wpcf7 is not defined.")
-    }))
+    // function m(t) {
+    //     const a = new FormData(t);
+    //     t.wpcf7 = {
+    //         id: e(a.get("_wpcf7")),
+    //         status: t.getAttribute("data-status"),
+    //         pluginVersion: a.get("_wpcf7_version"),
+    //         locale: a.get("_wpcf7_locale"),
+    //         unitTag: a.get("_wpcf7_unit_tag"),
+    //         containerPost: e(a.get("_wpcf7_container_post")),
+    //         parent: t.closest(".wpcf7"),
+    //         schema: void 0
+    //     }, t.querySelectorAll(".has-spinner").forEach((e => {
+    //         e.insertAdjacentHTML("afterend", '<span class="wpcf7-spinner"></span>')
+    //     })), (e => {
+    //         e.querySelectorAll(".wpcf7-exclusive-checkbox").forEach((t => {
+    //             t.addEventListener("change", (t => {
+    //                 const a = t.target.getAttribute("name");
+    //                 e.querySelectorAll(`input[type="checkbox"][name="${a}"]`).forEach((e => {
+    //                     e !== t.target && (e.checked = !1)
+    //                 }))
+    //             }))
+    //         }))
+    //     })(t), (e => {
+    //         e.querySelectorAll(".has-free-text").forEach((t => {
+    //             const a = t.querySelector("input.wpcf7-free-text"),
+    //                 n = t.querySelector('input[type="checkbox"], input[type="radio"]');
+    //             a.disabled = !n.checked, e.addEventListener("change", (e => {
+    //                 a.disabled = !n.checked, e.target === n && n.checked && a.focus()
+    //             }))
+    //         }))
+    //     })(t), (e => {
+    //         e.querySelectorAll(".wpcf7-validates-as-url").forEach((e => {
+    //             e.addEventListener("change", (t => {
+    //                 let a = e.value.trim();
+    //                 a && !a.match(/^[a-z][a-z0-9.+-]*:/i) && -1 !== a.indexOf(".") && (a = a.replace(/^\/+/, ""), a = "http://" + a), e.value = a
+    //             }))
+    //         }))
+    //     })(t), (e => {
+    //         if (!e.querySelector(".wpcf7-acceptance") || e.classList.contains("wpcf7-acceptance-as-validation")) return;
+    //         const t = () => {
+    //             let t = !0;
+    //             e.querySelectorAll(".wpcf7-acceptance").forEach((e => {
+    //                 if (!t || e.classList.contains("optional")) return;
+    //                 const a = e.querySelector('input[type="checkbox"]');
+    //                 (e.classList.contains("invert") && a.checked || !e.classList.contains("invert") && !a.checked) && (t = !1)
+    //             })), e.querySelectorAll(".wpcf7-submit").forEach((e => {
+    //                 e.disabled = !t
+    //             }))
+    //         };
+    //         t(), e.addEventListener("change", (e => {
+    //             t()
+    //         })), e.addEventListener("wpcf7reset", (e => {
+    //             t()
+    //         }))
+    //     })(t), (t => {
+    //         const a = (t, a) => {
+    //                 const n = e(t.getAttribute("data-starting-value")),
+    //                     r = e(t.getAttribute("data-maximum-value")),
+    //                     o = e(t.getAttribute("data-minimum-value")),
+    //                     c = t.classList.contains("down") ? n - a.value.length : a.value.length;
+    //                 t.setAttribute("data-current-value", c), t.innerText = c, r && r < a.value.length ? t.classList.add("too-long") : t.classList.remove("too-long"), o && a.value.length < o ? t.classList.add("too-short") : t.classList.remove("too-short")
+    //             },
+    //             n = e => {
+    //                 e = {
+    //                     init: !1,
+    //                     ...e
+    //                 }, t.querySelectorAll(".wpcf7-character-count").forEach((n => {
+    //                     const r = n.getAttribute("data-target-name"),
+    //                         o = t.querySelector(`[name="${r}"]`);
+    //                     o && (o.value = o.defaultValue, a(n, o), e.init && o.addEventListener("keyup", (e => {
+    //                         a(n, o)
+    //                     })))
+    //                 }))
+    //             };
+    //         n({
+    //             init: !0
+    //         }), t.addEventListener("wpcf7reset", (e => {
+    //             n()
+    //         }))
+    //     })(t), window.addEventListener("load", (e => {
+    //         wpcf7.cached && t.reset()
+    //     })), t.addEventListener("reset", (e => {
+    //         wpcf7.reset(t)
+    //     })), t.addEventListener("submit", (e => {
+    //         wpcf7.submit(t, {
+    //             submitter: e.submitter
+    //         }), e.preventDefault()
+    //     })), t.addEventListener("wpcf7submit", (e => {
+    //         e.detail.apiResponse.captcha && u(t, e.detail.apiResponse.captcha), e.detail.apiResponse.quiz && f(t, e.detail.apiResponse.quiz)
+    //     })), t.addEventListener("wpcf7reset", (e => {
+    //         e.detail.apiResponse.captcha && u(t, e.detail.apiResponse.captcha), e.detail.apiResponse.quiz && f(t, e.detail.apiResponse.quiz)
+    //     })), n({
+    //         endpoint: `contact-forms/${t.wpcf7.id}/feedback/schema`,
+    //         method: "GET"
+    //     }).then((e => {
+    //         t.wpcf7.schema = e
+    //     })), t.addEventListener("change", (e => {
+    //         e.target.closest(".wpcf7-form-control") && wpcf7.validate(t, {
+    //             target: e.target
+    //         })
+    //     }))
+    // }
+    // document.addEventListener("DOMContentLoaded", (e => {
+    //     var t;
+    //     "undefined" != typeof wpcf7 ? void 0 !== wpcf7.api ? "function" == typeof window.fetch ? "function" == typeof window.FormData ? "function" == typeof NodeList.prototype.forEach ? "function" == typeof String.prototype.replaceAll ? (wpcf7 = {
+    //         init: m,
+    //         submit: l,
+    //         reset: p,
+    //         validate: o,
+    //         ...null !== (t = wpcf7) && void 0 !== t ? t : {}
+    //     }, document.querySelectorAll(".wpcf7 > form").forEach((e => {
+    //         wpcf7.init(e), e.closest(".wpcf7").classList.replace("no-js", "js")
+    //     }))) : console.error("Your browser does not support String.replaceAll().") : console.error("Your browser does not support NodeList.forEach().") : console.error("Your browser does not support window.FormData().") : console.error("Your browser does not support window.fetch().") : console.error("wpcf7.api is not defined.") : console.error("wpcf7 is not defined.")
+    // }))
 }();
