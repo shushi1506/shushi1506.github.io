@@ -1,23 +1,158 @@
 @font-face {
-    font-family: 'CustomFont'; /* Tên font bạn chọn */
-    src: url('/wedding/fonts/DFVN\ Boheme\ Floral.otf') format('truetype'); /* Đường dẫn đến file font */
+    font-family: 'CustomFont';
+    /* Tên font bạn chọn */
+    src: url('/wedding/fonts/DFVN\ Boheme\ Floral.otf') format('truetype');
+    /* Đường dẫn đến file font */
 }
+
 .beautiful-card {
-    font-family: 'CustomFont', serif; /* Sử dụng font chữ từ Google Fonts */
-    font-size: 64px; /* Kích thước chữ */
-    font-weight: 500; /* Độ đậm của chữ */
-    color: #333; /* Màu chữ */
+    font-family: 'CustomFont', serif;
+    /* Sử dụng font chữ từ Google Fonts */
+    font-size: 64px;
+    /* Kích thước chữ */
+    font-weight: 500;
+    /* Độ đậm của chữ */
+    color: #333;
+    /* Màu chữ */
     /* background-color: #f9f9f9; Màu nền */
     /* padding: 20px; Khoảng cách bên trong thẻ */
     /* border-radius: 10px; Bo góc thẻ */
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); Đổ bóng */
-    text-align: center; /* Căn giữa chữ */
-    max-width: 300px; /* Chiều rộng tối đa */
-    margin: 20px auto; /* Căn giữa thẻ */
+    text-align: center;
+    /* Căn giữa chữ */
+    max-width: 300px;
+    /* Chiều rộng tối đa */
+    margin: 20px auto;
+    /* Căn giữa thẻ */
 }
+
 .img-custom {
-    border: 5px solid #ffffff; /* Viền dày 5px, màu đỏ */
-    border-radius: 220px; /* Bo góc viền */
+    border: 5px solid #ffffff;
+    /* Viền dày 5px, màu đỏ */
+    border-radius: 220px;
+    /* Bo góc viền */
     /* padding: 10px; Khoảng cách giữa viền và hình ảnh */
-    background-color: #f0f0f0; /* Màu nền giữa viền và hình ảnh */
+    background-color: #f0f0f0;
+    /* Màu nền giữa viền và hình ảnh */
+}
+
+#lottie-loader {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+    display: none;
+    /* Ẩn ban đầu */
+}
+
+
+/* Nút cơ bản */
+button {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #3498db, #8e44ad);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: linear-gradient(45deg, #2980b9, #9b59b6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Biểu tượng loading */
+button.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+/* Vô hiệu hóa nút khi loading */
+button.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* Animation xoay */
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+
+
+/* Nút cố định */
+#music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    /* width: 50px; */
+    /* height: 50px; */
+    /* font-size: 20px; */
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+#music-control:hover {
+    transform: scale(1.1);
+}
+
+#music-control:active {
+    transform: scale(0.9);
+}
+
+/* Ẩn thanh điều khiển audio mặc định */
+audio {
+    display: none;
+}
+
+#music-control.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
