@@ -122,7 +122,7 @@
         src: url(https://thiepcuoionline.net/wp-content/themes/flatsome/assets/css/icons/fl-icons.eot?v=3.15.7);
         src: url(https://thiepcuoionline.net/wp-content/themes/flatsome/assets/css/icons/fl-icons.eot#iefix?v=3.15.7)
             format("embedded-opentype"),
-          url(/wedding/wp-content/themes/flatsome/assets/css/icons/fl-icons.woff2?v=3.15.7)
+          url(/wedding/wp-content/themes/flatsome/assets/css/icons/fl-icons.woff2)
             format("woff2"),
           url(/wedding/wp-content/themes/flatsome/assets/css/icons/fl-icons.ttf?v=3.15.7)
             format("truetype"),
@@ -650,13 +650,16 @@
           <div class="banner-inner fill">
             <div class="banner-bg fill">
               <div class="bg fill bg-fill"></div>
-
+              <!-- Thêm layer mây cho hiệu ứng -->
+              <div class="cloud-effect bg-effect fill no-click">
+                <div class="clouds dispersing"></div>
+              </div>
               <div class="effect-sparkle bg-effect fill no-click"></div>
             </div>
-
+        
             <div class="banner-layers container">
               <div class="fill banner-link"></div>
-
+        
               <div
                 id="text-box-1027160382"
                 class="text-box banner-layer x50 md-x50 lg-x50 y50 md-y50 lg-y50 res-text"
@@ -664,12 +667,11 @@
                 <div class="text-box-content text dark">
                   <div class="text-inner text-center"></div>
                 </div>
-
+        
                 <style>
                   #text-box-1027160382 {
                     width: 60%;
                   }
-
                   #text-box-1027160382 .text-box-content {
                     font-size: 100%;
                   }
@@ -677,34 +679,78 @@
               </div>
             </div>
           </div>
-
+        
           <style>
             #banner-318390681 {
               padding-top: 620px;
+              opacity: 0; /* Ban đầu ẩn để tạo hiệu ứng fade-in */
+              animation: fadeIn 1s ease-in forwards; /* Hiệu ứng fade-in */
             }
-
+        
             #banner-318390681 .bg.bg-loaded {
               background-image: url(/wedding/images/single/35.jpg);
+              animation: bgFadeIn 1.5s ease-in-out; /* Hiệu ứng cho background */
             }
-
+        
             #banner-318390681 .overlay {
               background-color: rgba(255, 255, 255, 0);
             }
-
+        
             #banner-318390681 .bg {
               background-position: 42% 77%;
             }
-
+        
+            /* Hiệu ứng mây tan ra */
+            .cloud-effect {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+              z-index: 1;
+              opacity: 1;
+              transition: opacity 0.8s ease-out;
+            }
+        
+            .cloud-effect .clouds {
+              width: 100%;
+              height: 100%;
+              background: url('/wedding/images/content/0lpY4wQ6pDupJB5B-generated_image.jpg') repeat-x; /* Đường dẫn tới ảnh mây */
+              animation: cloudDisperse 2s ease-out forwards;
+            }
+        
+            /* Khi banner load xong, ẩn mây */
+            #banner-318390681.loaded .cloud-effect {
+              opacity: 0;
+            }
+        
+            /* Keyframes cho các hiệu ứng */
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+        
+            @keyframes bgFadeIn {
+              from { opacity: 0; transform: scale(1.05); }
+              to { opacity: 1; transform: scale(1); }
+            }
+        
+            @keyframes cloudDisperse {
+              0% { transform: translateX(0); opacity: 1; }
+              100% { transform: translateX(-100px); opacity: 0; }
+            }
+        
             #banner-318390681 .ux-shape-divider--top svg {
               height: 150px;
               --divider-top-width: 100%;
             }
-
+        
             #banner-318390681 .ux-shape-divider--bottom svg {
               height: 150px;
               --divider-width: 100%;
             }
-
+        
             @media (min-width: 550px) {
               #banner-318390681 {
                 padding-top: 620px;
@@ -1005,6 +1051,7 @@
                       class="img has-hover x md-x lg-x y md-y lg-y"
                       id="image_424565499"
                     >
+                    <div data-animate="fadeInLeftBig">
                       <div class="img-inner dark">
                         <img
                           decoding="async"
@@ -1019,6 +1066,8 @@
                           sizes="(max-width: 1728px) 100vw, 1728px"
                         />
                       </div>
+                    </div>
+                      
 
                       <style>
                         #image_424565499 {
@@ -1035,7 +1084,7 @@
 
                     <p>
                       <span style="font-size: 80%"
-                        >(NHẰM NGÀY 10 THÁNG 02 NĂM ẤT TỴ)</span
+                        >(TỨC NGÀY 10 THÁNG 02 NĂM ẤT TỴ)</span
                       >
                     </p>
                     <a
@@ -2557,6 +2606,9 @@
                                 name="your-name"
                             /></span>
                           </p>
+                          <p id="error-message" class="error-message" style="color: red; display: none;">
+                            Vui lòng điền tên của bạn.
+                          </p>
                           <p>
                             <label> Quý khách tham dự được chứ?</label><br />
                             <span
@@ -2831,19 +2883,19 @@
                       <div data-animate="fadeInUp">
                         <div
                           class="img-inner image-cover dark"
-                          style="padding-top: 130%"
+                          style="padding-top: 177.78%"
                         >
                           <img
                             decoding="async"
-                            width="1365"
-                            height="2048"
+                            width="720"
+                            height="1280"
                             src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201365%202048%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E"
                             data-src="/wedding/images/gallery/anh_ghep.jpg"
                             class="lazy-load attachment-original size-original"
                             alt=""
                             srcset=""
                             data-srcset="/wedding/images/gallery/anh_ghep.jpg 720w"
-                            sizes="(max-width: 1365px) 100vw, 1365px"
+                            sizes="(max-width: 1280px) 100vw, 1280px"
                           />
                         </div>
                       </div>
@@ -3081,6 +3133,7 @@
                     class="img has-hover x md-x lg-x y md-y lg-y"
                     id="image_212215801"
                   >
+                  <div data-animate="fadeInUp">
                     <div class="img-inner dark">
                       <img
                         decoding="async"
@@ -3098,7 +3151,7 @@
                         sizes="(max-width: 800px) 100vw, 800px"
                       />
                     </div>
-
+                  </div>
                     <style>
                       #image_212215801 {
                         width: 100%;
@@ -3767,56 +3820,56 @@
     </script>
 
     <script>
-      !(function (w, d, t) {
-        w.TiktokAnalyticsObject = t;
-        var ttq = (w[t] = w[t] || []);
-        (ttq.methods = [
-          "page",
-          "track",
-          "identify",
-          "instances",
-          "debug",
-          "on",
-          "off",
-          "once",
-          "ready",
-          "alias",
-          "group",
-          "enableCookie",
-          "disableCookie",
-        ]),
-          (ttq.setAndDefer = function (t, e) {
-            t[e] = function () {
-              t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
-            };
-          });
-        for (var i = 0; i < ttq.methods.length; i++)
-          ttq.setAndDefer(ttq, ttq.methods[i]);
-        (ttq.instance = function (t) {
-          for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)
-            ttq.setAndDefer(e, ttq.methods[n]);
-          return e;
-        }),
-          (ttq.load = function (e, n) {
-            var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
-            (ttq._i = ttq._i || {}),
-              (ttq._i[e] = []),
-              (ttq._i[e]._u = i),
-              (ttq._t = ttq._t || {}),
-              (ttq._t[e] = +new Date()),
-              (ttq._o = ttq._o || {}),
-              (ttq._o[e] = n || {});
-            var o = document.createElement("script");
-            (o.type = "text/javascript"),
-              (o.async = !0),
-              (o.src = i + "?sdkid=" + e + "&lib=" + t);
-            var a = document.getElementsByTagName("script")[0];
-            a.parentNode.insertBefore(o, a);
-          });
+      // !(function (w, d, t) {
+      //   w.TiktokAnalyticsObject = t;
+      //   var ttq = (w[t] = w[t] || []);
+      //   (ttq.methods = [
+      //     "page",
+      //     "track",
+      //     "identify",
+      //     "instances",
+      //     "debug",
+      //     "on",
+      //     "off",
+      //     "once",
+      //     "ready",
+      //     "alias",
+      //     "group",
+      //     "enableCookie",
+      //     "disableCookie",
+      //   ]),
+      //     (ttq.setAndDefer = function (t, e) {
+      //       t[e] = function () {
+      //         t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+      //       };
+      //     });
+      //   for (var i = 0; i < ttq.methods.length; i++)
+      //     ttq.setAndDefer(ttq, ttq.methods[i]);
+      //   (ttq.instance = function (t) {
+      //     for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)
+      //       ttq.setAndDefer(e, ttq.methods[n]);
+      //     return e;
+      //   }),
+      //     (ttq.load = function (e, n) {
+      //       var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
+      //       (ttq._i = ttq._i || {}),
+      //         (ttq._i[e] = []),
+      //         (ttq._i[e]._u = i),
+      //         (ttq._t = ttq._t || {}),
+      //         (ttq._t[e] = +new Date()),
+      //         (ttq._o = ttq._o || {}),
+      //         (ttq._o[e] = n || {});
+      //       var o = document.createElement("script");
+      //       (o.type = "text/javascript"),
+      //         (o.async = !0),
+      //         (o.src = i + "?sdkid=" + e + "&lib=" + t);
+      //       var a = document.getElementsByTagName("script")[0];
+      //       a.parentNode.insertBefore(o, a);
+      //     });
 
-        ttq.load("CGBS95BC77U573C91360");
-        ttq.page();
-      })(window, document, "ttq");
+      //   ttq.load("CGBS95BC77U573C91360");
+      //   ttq.page();
+      // })(window, document, "ttq");
     </script>
     <script src="/wedding/scripts/script_wedding.js"></script>
   </body>
