@@ -56,6 +56,12 @@ button {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Tắt hiệu ứng mặc định trên di động */
+    -webkit-tap-highlight-color: transparent; /* Tắt highlight trên iOS/Android */
+    -webkit-touch-callout: none; /* Ngăn menu ngữ cảnh trên iOS */
+    -webkit-user-select: none; /* Ngăn chọn văn bản */
+    user-select: none; /* Ngăn chọn văn bản trên các trình duyệt khác */
+    outline: none; /* Tắt viền focus mặc định */
   }
 
   button:hover {
